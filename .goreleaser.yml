@@ -1,0 +1,17 @@
+before:
+  hooks:
+    - go mod download
+builds:
+- goos:
+  - linux
+  - darwin
+  goarch:
+  - amd64
+  env:
+  - CGO_ENABLED=0
+changelog:
+  sort: asc
+  filters:
+    exclude:
+    - '^docs:'
+    - '^test:'
