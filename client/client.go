@@ -10,7 +10,7 @@ import (
 	"github.com/prometheus/common/log"
 )
 
-// Client is the sgw client
+// Client is the elasticsearch task client
 type Client interface {
 	Tasks() ([]Task, error)
 }
@@ -19,7 +19,7 @@ type client struct {
 	baseURL string
 }
 
-// New creates a new couchbase client
+// New creates a new elasticsearch client
 func New(url string) Client {
 	return &client{
 		baseURL: url,
