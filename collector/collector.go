@@ -102,6 +102,7 @@ func (c *collector) Collect(ch chan<- prometheus.Metric) {
 
 	log.Info("Collecting ES Reindex metrics...")
 	tasks, err := c.client.Tasks()
+	log.With("tasks", tasks).With("error", err).Debug("collected")
 	if err != nil {
 		ch <- prometheus.MustNewConstMetric(c.up, prometheus.GaugeValue, 0)
 		log.With("error", err).Error("failed to scrape ES")
