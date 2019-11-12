@@ -109,6 +109,7 @@ func (c *collector) Collect(ch chan<- prometheus.Metric) {
 	}
 
 	for _, task := range tasks {
+		log.Debugf("task: %s", task.Description)
 		var match = indexNameRE.FindStringSubmatch(task.Description)
 		if len(match) < 1 {
 			ch <- prometheus.MustNewConstMetric(c.up, prometheus.GaugeValue, 0)
@@ -116,6 +117,7 @@ func (c *collector) Collect(ch chan<- prometheus.Metric) {
 			return
 		}
 		var index = match[1]
+		log.With("index", index).Debug("ongoing reindex")
 		ch <- prometheus.MustNewConstMetric(c.total, prometheus.GaugeValue, task.Status.Total, index)
 		ch <- prometheus.MustNewConstMetric(c.updated, prometheus.GaugeValue, task.Status.Updated, index)
 		ch <- prometheus.MustNewConstMetric(c.created, prometheus.GaugeValue, task.Status.Created, index)
