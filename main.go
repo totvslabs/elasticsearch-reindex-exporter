@@ -28,7 +28,7 @@ func main() {
 	log.AddFlags(app)
 	kingpin.MustParse(app.Parse(os.Args[1:]))
 
-	log.Infof("starting elasticsearch-reindex-exporter %s...\n", version)
+	log.Infof("starting elasticsearch-reindex-exporter %s on %s...\n", version, *esURL)
 
 	var client = client.New(*esURL)
 
