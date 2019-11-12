@@ -30,6 +30,8 @@ func main() {
 
 	log.Infof("starting elasticsearch-reindex-exporter %s on %s...\n", version, *esURL)
 
+	log.Debug("debug enabled")
+
 	var client = client.New(*esURL)
 
 	prometheus.MustRegister(collector.NewCollector(client))
