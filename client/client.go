@@ -42,6 +42,7 @@ func (c *client) Tasks() ([]Task, error) {
 	if err != nil {
 		return tasks, errors.Wrap(err, "failed to parse metrics")
 	}
+	log.Debugf("body: %s", string(bts))
 	if err := json.Unmarshal(bts, &result); err != nil {
 		return tasks, errors.Wrap(err, "failed to parse metrics")
 	}
